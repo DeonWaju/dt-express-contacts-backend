@@ -7,23 +7,23 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-    res.status(successStatus).json({message: `Get contact for ${req.param.id}` });
+    res.status(successStatus).json({message: `Get contact for ${req.params.id}` });
 });
 
-router.route("/").post((req, res) => {
-    res.status(successStatus).json({message: `Create contact` });
+router.route("/:id").post((req, res) => {
+    res.status(successStatus).json({message: `Create contact for ${req.params.id}` });
 });
 
 router.route("/:id").put((req, res) => {
-    res.status(successStatus).json({message: `Put contact for ${req.param.id}` });
+    res.status(successStatus).json({message: `Put contact for ${req.params.id}` });
 });
 
 router.route("/:id").patch((req, res) => {
-    res.status(successStatus).json({message: `Update contact for ${req.param.id}` });
+    res.status(successStatus).json({message: `Update contact for ${req.params.id}` });
 });
 
 router.route("/:id").delete((req, res)=> {
-    res.status(successStatus).json({message: `Delete contact for ${req.param.id}` });
+    res.status(successStatus).json({message: `Delete contact for ${req.params.id}` });
 });
 
 
