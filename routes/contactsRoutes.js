@@ -20,7 +20,7 @@ router.route("/:id").put(putContact);
 
 router.route("/:id").patch(patchContactById);
 
-router.route("/:id").delete(deleteContactById);
+router.route("/:id").delete(deleteContactById); 
 
 
 module.exports = router;

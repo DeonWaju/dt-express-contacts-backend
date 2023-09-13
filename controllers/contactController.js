@@ -16,20 +16,29 @@ const getContacts = asyncHandler(async (req, res) => {
 // @route GET /api/contacts/:id
 // @access public
 const getContactById = asyncHandler(async (req, res) => {
-    res.status(constants.SUCCESSFUL).json({
-        message: `Get contact for ${req.params.id}`,
-        status: constants.SUCCESSFUL  
-    });
+    const contact = await Contacts.findById(req.params.id);
+    if(!contact){
+        res.status(constants.NOT_FOUND);
+        throw new Error(constants.CONTACT_NOT_FOUND);
+    }
+    res.status(constants.SUCCESSFUL).json(contact);
 });
 
 // @desc update contact
 // @route PUT /api/contacts/:id
 // @access public
 const putContact = asyncHandler(async (req, res) => {
-    res.status(constants.SUCCESSFUL).json({
-        message: `Put contact for ${req.params.id}`,
-        status: constants.SUCCESSFUL  
-    });
+    const contact = await Contacts.findById(req.params.id);
+    if(!contact){
+        res.status(constants.NOT_FOUND);
+        throw new Error(constants.CONTACT_NOT_FOUND);
+    }
+    const updateContact = await Contacts.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new: true}
+    );
+    res.status(constants.SUCCESSFUL).json(updateContact);
 });
 
 // @desc patch a contact
@@ -62,10 +71,13 @@ const createContact = asyncHandler(async (req, res) => {
 // @route DELETE /api/contacts/:id
 // @access public
 const deleteContactById = asyncHandler(async (req, res) => {
-    res.status(constants.SUCCESSFUL).json({
-    message: `Delete contact for ${req.params.id}`,
-    status: constants.SUCCESSFUL 
-});
-});
+    const contact = await Contacts.findById(req.params.id);
+    if(!contact){
+        res.status(constants.NOT_FOUND);
+        throw new Error(constants.CONTACT_NOT_FOUND);
+    }
+    await Contacts.remove();
+    res.status(constants.SUCCESSFUL).json(contact);
+}); 
 
 module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, createContact}
