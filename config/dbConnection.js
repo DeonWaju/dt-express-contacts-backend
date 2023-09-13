@@ -15,4 +15,5 @@ const connectionDb = async () => {
     }
 };
 
+
 module.exports = connectionDb;
