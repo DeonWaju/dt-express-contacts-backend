@@ -1,5 +1,6 @@
 const {constants} = require("../constants");
 const asyncHandler = require("express-async-handler");
+const Contacts = require("../models/contactModel");
 
 // @desc Get all contacts
 // @route GET /api/contacts
