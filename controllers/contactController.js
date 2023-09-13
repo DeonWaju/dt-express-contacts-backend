@@ -1,69 +1,68 @@
-const successStatus = 200
-const createStatus = 201
+const {constants} = require("../constants");
 
 // @desc Get all contacts
 // @route GET /api/contacts
 // @access public
-const getContacts = (req, res) => {
-    res.status(successStatus).json({
+const getContacts = async (req, res) => {
+    res.status(constants.SUCCESSFUL).json({
         message: "All contacts",
-        status: successStatus 
+        status: constants.SUCCESSFUL 
      });
 };
 
 // @desc Get contact by id
 // @route GET /api/contacts/:id
 // @access public
-const getContactById = (req, res) => {
-    res.status(successStatus).json({
+const getContactById = async (req, res) => {
+    res.status(constants.SUCCESSFUL).json({
         message: `Get contact for ${req.params.id}`,
-        status: successStatus  
+        status: constants.SUCCESSFUL  
     });
 };
 
 // @desc update contact
 // @route PUT /api/contacts/:id
 // @access public
-const putContact = (req, res) => {
-    res.status(successStatus).json({
+const putContact = async (req, res) => {
+    res.status(constants.SUCCESSFUL).json({
         message: `Put contact for ${req.params.id}`,
-        status: successStatus  
+        status: constants.SUCCESSFUL  
     });
 };
 
 // @desc patch a contact
 // @route PATCH /api/contacts/:id
 // @access public
-const patchContactById = (req, res) => {
-    res.status(successStatus).json({
+const patchContactById = async (req, res) => {
+    res.status(constants.SUCCESSFUL).json({
         message: `Update contact for ${req.params.id}`,
-        status: successStatus 
+        status: constants.SUCCESSFUL 
     });
 };
 
 // @desc create new contact
 // @route POST /api/contacts/:id
 // @access public
-const creatContact = (req, res) => {
+const creatContact = async (req, res) => {
     console.log(`The created request body:::`, req.body)
     const{name, email, phone} = req.body
     if(!name || !email || !phone) {
-        res.status(400)
+        res.status(constants.VALIDATION_ERROR)
         throw new Error("All fields are necessary")
     }
-    res.status(createStatus).json({
+    res.status(constants.SUCCESSFUL).json({
         message: `Create contact for ${req.params.id}`,
-        status: createStatus 
+        status: constants.SUCCESSFUL 
      });
 };
 
 // @desc delete contact by id
 // @route DELETE /api/contacts/:id
 // @access public
-const deleteContactById = (req, res) => {
-    res.status(successStatus).json({
+const deleteContactById = async (req, res) => {
+    res.status(constants.SUCCESSFUL).json({
     message: `Delete contact for ${req.params.id}`,
-    status: successStatus 
+    status: constants.SUCCESSFUL 
 });
 };
 
