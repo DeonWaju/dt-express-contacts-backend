@@ -1,49 +1,50 @@
 const {constants} = require("../constants");
+const asyncHandler = require("express-async-handler");
 
 // @desc Get all contacts
 // @route GET /api/contacts
 // @access public
-const getContacts = async (req, res) => {
+const getContacts = asyncHandler(async (req, res) => {
     res.status(constants.SUCCESSFUL).json({
         message: "All contacts",
         status: constants.SUCCESSFUL 
      });
-};
+});
 
 // @desc Get contact by id
 // @route GET /api/contacts/:id
 // @access public
-const getContactById = async (req, res) => {
+const getContactById = asyncHandler(async (req, res) => {
     res.status(constants.SUCCESSFUL).json({
         message: `Get contact for ${req.params.id}`,
         status: constants.SUCCESSFUL  
     });
-};
+});
 
 // @desc update contact
 // @route PUT /api/contacts/:id
 // @access public
-const putContact = async (req, res) => {
+const putContact = asyncHandler(async (req, res) => {
     res.status(constants.SUCCESSFUL).json({
         message: `Put contact for ${req.params.id}`,
         status: constants.SUCCESSFUL  
     });
-};
+});
 
 // @desc patch a contact
 // @route PATCH /api/contacts/:id
 // @access public
-const patchContactById = async (req, res) => {
+const patchContactById = asyncHandler(async (req, res) => {
     res.status(constants.SUCCESSFUL).json({
         message: `Update contact for ${req.params.id}`,
         status: constants.SUCCESSFUL 
     });
-};
+});
 
 // @desc create new contact
 // @route POST /api/contacts/:id
 // @access public
-const creatContact = async (req, res) => {
+const creatContact = asyncHandler(async (req, res) => {
     console.log(`The created request body:::`, req.body)
     const{name, email, phone} = req.body
     if(!name || !email || !phone) {
@@ -54,16 +55,16 @@ const creatContact = async (req, res) => {
         message: `Create contact for ${req.params.id}`,
         status: constants.SUCCESSFUL 
      });
-};
+});
 
 // @desc delete contact by id
 // @route DELETE /api/contacts/:id
 // @access public
-const deleteContactById = async (req, res) => {
+const deleteContactById = asyncHandler(async (req, res) => {
     res.status(constants.SUCCESSFUL).json({
     message: `Delete contact for ${req.params.id}`,
     status: constants.SUCCESSFUL 
 });
-};
+});
 
 module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, creatContact}
