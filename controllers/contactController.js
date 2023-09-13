@@ -51,7 +51,7 @@ const creatContact = (req, res) => {
         res.status(400)
         throw new Error("All fields are necessary")
     }
-    res.status(successStatus).json({
+    res.status(createStatus).json({
         message: `Create contact for ${req.params.id}`,
         status: createStatus 
      });
