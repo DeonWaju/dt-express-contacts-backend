@@ -45,17 +45,17 @@ const patchContactById = asyncHandler(async (req, res) => {
 // @desc create new contact
 // @route POST /api/contacts/:id
 // @access public
-const creatContact = asyncHandler(async (req, res) => {
+const createContact = asyncHandler(async (req, res) => {
     console.log(`The created request body:::`, req.body)
     const{name, email, phone} = req.body
     if(!name || !email || !phone) {
         res.status(constants.VALIDATION_ERROR)
         throw new Error("All fields are necessary")
     }
-    res.status(constants.SUCCESSFUL).json({
-        message: `Create contact for ${req.params.id}`,
-        status: constants.SUCCESSFUL 
-     });
+    const contact = await Contacts.create({
+        name, email, phone
+    })
+    res.status(constants.CREATED).json(contact);
 });
 
 // @desc delete contact by id
@@ -68,4 +68,4 @@ const deleteContactById = asyncHandler(async (req, res) => {
 });
 });
 
-module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, creatContact}
+module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, createContact}

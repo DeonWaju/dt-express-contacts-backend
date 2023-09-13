@@ -6,13 +6,13 @@ const {
     putContact, 
     patchContactById, 
     deleteContactById, 
-    creatContact
+    createContact
 } 
 = require("../controllers/contactController");
 
 router.route("/").get(getContacts);
 
-router.route("/:id").post(creatContact);
+router.route("/").post(createContact);
 
 router.route("/:id").get(getContactById);
 
