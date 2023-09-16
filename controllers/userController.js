@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 const Contacts = require("../models/contactModel");
 
 
-
 // @desc create new contact
 // @route POST /api/contacts/register
 // @access public

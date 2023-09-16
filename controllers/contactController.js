@@ -6,10 +6,8 @@ const Contacts = require("../models/contactModel");
 // @route GET /api/contacts
 // @access public
 const getContacts = asyncHandler(async (req, res) => {
-    res.status(constants.SUCCESSFUL).json({
-        message: "All contacts",
-        status: constants.SUCCESSFUL 
-     });
+    const contacts = await Contacts.find()
+    res.status(constants.SUCCESSFUL).json(contacts);
 });
 
 // @desc Get contact by id
@@ -77,7 +75,7 @@ const deleteContactById = asyncHandler(async (req, res) => {
         throw new Error(constants.CONTACT_NOT_FOUND);
     }
     await Contacts.remove();
-    res.status(constants.SUCCESSFUL).json(contact);
+    res.status(constants.SUCCESSFUL).json({contact});
 }); 
 
 module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, createContact}
