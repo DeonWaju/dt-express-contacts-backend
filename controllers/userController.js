@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const {constants} = require("../constants");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // @desc create new contact
 // @route POST /api/contacts/register
@@ -45,6 +46,14 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/login
 // @access public
 const loginUser = asyncHandler(async (req, res) => {
+    const {email, password} = req.body
+    if(!email || !password){
+        res.status(constants.FORBIDDEN_ERROR);
+        throw new Error(constants.ALL_FIELDS_ARE_MANADATORY);
+    }
+    const user = await User.findOne({email});
+    if(user && (await bcrypt.compare(password, user.password)))
+
     res.json({message: "log in"});
 });
 
