@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
             }
         }, process.env.ACCESS_TOKEN_SECRET,
         {expiresIn: "1m"}
-        );
+    );
         res.status(constants.SUCCESSFUL).json({accessToken})
     } else {
         res.status(constants.VALIDATION_ERROR)
