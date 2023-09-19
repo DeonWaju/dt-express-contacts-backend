@@ -3,6 +3,7 @@ const {constants} = require("../constants");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { response } = require("express");
 
 // @desc create new contact
 // @route POST /api/contacts/register
@@ -52,9 +53,22 @@ const loginUser = asyncHandler(async (req, res) => {
         throw new Error(constants.ALL_FIELDS_ARE_MANADATORY);
     }
     const user = await User.findOne({email});
-    if(user && (await bcrypt.compare(password, user.password)))
-
-    res.json({message: "log in"});
+   
+    if(user && (await bcrypt.compare(password, user.password))){
+        const accessToken = jwt.sign({
+            user:{ 
+                username: user.name,
+                email: user.email,
+                id: user.id
+            }
+        }, process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn: "1m"}
+        );
+        res.status(constants.SUCCESSFUL).json({accessToken})
+    } else {
+        res.status(constants.VALIDATION_ERROR)
+        throw new Error("Email or password invalid")
+    }
 });
 
 // @desc current user
