@@ -13,6 +13,9 @@ exports.constants = {
     NAME_ERROR: "Please add contact name",
     EMAIL_ERROR: "Please add contact mail",
     PHONE_ERROR: "Please add contact phone",
+    USER_NAME_ERROR: "Please add contact phone",
+    PHONE_ERROR: "Please input valid phone number",
+    PASSWORD_ERROR: "Please input valid password",
 
     // errors
     CONTACT_NOT_FOUND: "contact not found"
