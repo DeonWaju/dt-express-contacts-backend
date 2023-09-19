@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
         required: [true, constants.PASSWORD_ERROR]
     }
 },{
-    timeStamps: true
+    timestamps: true
 });
 
 module.exports = mongoose.model(constants.USER, userSchema);
