@@ -12,7 +12,31 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(constants.FORBIDDEN_ERROR);
         throw new Error(constants.ALL_FIELDS_ARE_MANADATORY);
     }
-  
+    const emailAvailable = await User.findOne({ email });
+    if(emailAvailable){
+        res.status(constants.FORBIDDEN_ERROR);
+        throw new Error(constants.EMAIL_EXISTS);
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10)
+    console.log("Hashed password:", hashedPassword)
+    const user = await User.create({
+        username, 
+        email, 
+        password: hashedPassword
+    })
+
+    console.log(`User created ${user}`)
+    if(user){
+        res.status(constants.CREATED).json({
+            _id: user.id,
+            email: user.email
+        });
+    } else {
+        res.status(constants.FORBIDDEN_ERROR);
+        throw new Error("Invalid data")
+    }
 
     res.json({message: "User created"});
 });
