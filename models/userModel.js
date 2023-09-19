@@ -1,17 +1,22 @@
-const mongoose = require("mongoose")
-const constants = require("../constants")
+const mongoose = require("mongoose");
+const { constants } = require("../constants");
 
 const userSchema = mongoose.Schema({
-    userName: {
+    username: {
         type: String,
         required: [true, constants.USER_NAME_ERROR]
     },
     email: {
         type: String,
-        required: [true, constants.USER_NAME_ERROR]
+        required: [true, constants.EMAIL_ERROR],
+        unique: [true, constants.EMAIL_EXISTS]
     },
     password: {
         type: String,
-        required: [true, constants.USER_NAME_ERROR]
+        required: [true, constants.PASSWORD_ERROR]
     }
-})
+},{
+    timeStamps: true
+});
+
+module.exports = mongoose.model(constants.USER, userSchema);

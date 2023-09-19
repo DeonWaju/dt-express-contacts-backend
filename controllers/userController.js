@@ -1,13 +1,20 @@
-const {constants} = require("../constants");
 const asyncHandler = require("express-async-handler");
-const Contacts = require("../models/contactModel");
-
+const {constants} = require("../constants");
+const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
 
 // @desc create new contact
 // @route POST /api/contacts/register
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
-    res.json({message: "created"});
+    const { username, email, password } = req.body;
+    if(!username || !email || !password){
+        res.status(constants.FORBIDDEN_ERROR);
+        throw new Error(constants.ALL_FIELDS_ARE_MANADATORY);
+    }
+  
+
+    res.json({message: "User created"});
 });
 
 // @desc login user

@@ -10,13 +10,14 @@ exports.constants = {
 
     // Strings
     CONTACTS: "Contacts",
+    USER: "User",
     NAME_ERROR: "Please add contact name",
     EMAIL_ERROR: "Please add contact mail",
     PHONE_ERROR: "Please add contact phone",
     USER_NAME_ERROR: "Please add contact phone",
     PHONE_ERROR: "Please input valid phone number",
     PASSWORD_ERROR: "Please input valid password",
-
-    // errors
-    CONTACT_NOT_FOUND: "contact not found"
+    EMAIL_EXISTS: "Email exists",
+    CONTACT_NOT_FOUND: "contact not found",
+    ALL_FIELDS_ARE_MANADATORY: "All fields are necessary"
 };
