@@ -53,8 +53,9 @@ const loginUser = asyncHandler(async (req, res) => {
         throw new Error(constants.ALL_FIELDS_ARE_MANADATORY);
     }
     const user = await User.findOne({email});
+    const comparePassword = (await bcrypt.compare(password, user.password))
    
-    if(user && (await bcrypt.compare(password, user.password))){
+    if(user && comparePassword){
         const accessToken = jwt.sign({
             user:{ 
                 username: user.name,
@@ -68,13 +69,13 @@ const loginUser = asyncHandler(async (req, res) => {
         res.status(constants.SUCCESSFUL).json({accessToken})
     } else {
         res.status(constants.VALIDATION_ERROR)
-        throw new Error("Email or password invalid")
+        throw new Error(constants.LOGIN_ERROR)
     }
 });
 
 // @desc current user
 // @route GET /api/users/current
-// @access public
+// @access private
 const currentUser = asyncHandler(async (req, res) => {
     res.json({message: "current"});
 });

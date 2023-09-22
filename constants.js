@@ -17,6 +17,7 @@ exports.constants = {
     USER_NAME_ERROR: "Please add contact phone",
     PHONE_ERROR: "Please input valid phone number",
     PASSWORD_ERROR: "Please input valid password",
+    LOGIN_ERROR: "Email or password invalid",
     EMAIL_EXISTS: "Email exists",
     CONTACT_NOT_FOUND: "contact not found",
     ALL_FIELDS_ARE_MANADATORY: "All fields are necessary"
