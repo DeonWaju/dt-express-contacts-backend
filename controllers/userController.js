@@ -36,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
             email: user.email
         });
     } else {
-        res.status(constants.FORBIDDEN_ERROR);
+        res.status(constants.VALIDATION_ERROR);
         throw new Error("Invalid data")
     }
 
@@ -47,9 +47,9 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/login
 // @access public
 const loginUser = asyncHandler(async (req, res) => {
-    const {email, password} = req.body
+    const { email, password } = req.body
     if(!email || !password){
-        res.status(constants.FORBIDDEN_ERROR);
+        res.status(constants.VALIDATION_ERROR);
         throw new Error(constants.ALL_FIELDS_ARE_MANADATORY);
     }
     const user = await User.findOne({email});
@@ -61,7 +61,8 @@ const loginUser = asyncHandler(async (req, res) => {
                 email: user.email,
                 id: user.id
             }
-        }, process.env.ACCESS_TOKEN_SECRET,
+        }, 
+        process.env.ACCESS_TOKEN_SECRET,
         {expiresIn: "1m"}
     );
         res.status(constants.SUCCESSFUL).json({accessToken})
@@ -83,5 +84,3 @@ module.exports = {
     loginUser, 
     currentUser
 }
-
-
