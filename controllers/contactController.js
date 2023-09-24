@@ -85,11 +85,4 @@ const deleteContactById = async (req, res, next) => {
     }
 }; 
 
-const contact = await Contacts.findById(req.params.id);
-    console.log('contact:::', contact);
-    if(!contact){
-        throw new Error(constants.CONTACT_NOT_FOUND);
-    }
-    await contact.remove();
-    res.status(constants.SUCCESSFUL).json({contact});
 module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, createContact}
