@@ -9,7 +9,7 @@ exports.constants = {
     SERVER_ERROR: 500,
 
     // Strings
-    CONTACTS: "Contacts",
+    CONTACTS: "contacts",
     USER: "User",
     NAME_ERROR: "Please add contact name",
     EMAIL_ERROR: "Please add contact mail",

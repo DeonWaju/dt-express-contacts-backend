@@ -6,7 +6,7 @@ const Contacts = require("../models/contactModel");
 // @route GET /api/contacts
 // @access public
 const getContacts = asyncHandler(async (req, res) => {
-    const contacts = await Contacts.find()
+    const contacts = await Contacts.find({ user_id: req.user.id });
     res.status(constants.SUCCESSFUL).json(contacts);
 });
 
@@ -68,14 +68,28 @@ const createContact = asyncHandler(async (req, res) => {
 // @desc delete contact by id
 // @route DELETE /api/contacts/:id
 // @access public
-const deleteContactById = asyncHandler(async (req, res) => {
-    const contact = await Contacts.findById(req.params.id);
+const deleteContactById = async (req, res, next) => {
+    try{
+        // check data
+        const contact = await Contacts.findById(req.params.id);
+        console.log('contact:::', contact);
+        if (!contact){
+            throw new Error(constants.CONTACT_NOT_FOUND);
+        }
+        // delete data
+        await Contacts.deleteOne({ _id: req.params.id});
+        res.status(constants.SUCCESSFUL).json({contact});
+    }catch(e){
+        console.log('err:', e);
+        return next(e);
+    }
+}; 
+
+const contact = await Contacts.findById(req.params.id);
+    console.log('contact:::', contact);
     if(!contact){
-        res.status(constants.NOT_FOUND);
         throw new Error(constants.CONTACT_NOT_FOUND);
     }
-    await Contacts.remove();
+    await contact.remove();
     res.status(constants.SUCCESSFUL).json({contact});
-}); 
-
 module.exports = {getContacts, getContactById, putContact, patchContactById, deleteContactById, createContact}

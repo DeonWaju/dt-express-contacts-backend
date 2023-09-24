@@ -9,18 +9,12 @@ const {
     createContact
 } 
 = require("../controllers/contactController");
+const validateToken = require("../middleware/validateTokenHandler");
 
-router.route("/").get(getContacts);
+// router.use(validateToken);
 
-router.route("/").post(createContact);
+router.route("/").get(getContacts).post(createContact);
 
-router.route("/:id").get(getContactById);
-
-router.route("/:id").put(putContact);
-
-router.route("/:id").patch(patchContactById);
-
-router.route("/:id").delete(deleteContactById); 
-
+router.route("/:id").get(getContactById).put(putContact).delete(deleteContactById).patch(patchContactById);
 
 module.exports = router;
