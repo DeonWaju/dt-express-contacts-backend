@@ -15,10 +15,14 @@ const validateToken = asyncHandler(async (req, res, next) => {
             }
             console.log(decoded)
             req.user = decoded.user;
+            next();
         });
-        return next();
     }
-    throw new Error('Invalid token');
+
+    if(!token) {
+        res.status(constants.AUTHORIZATION_ERROR)
+        throw new Error('Invalid token');
+    }
 });
 
 module.exports = validateToken;

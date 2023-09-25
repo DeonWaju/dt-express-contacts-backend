@@ -7,6 +7,7 @@ exports.constants = {
     FORBIDDEN_ERROR: 403,
     NOT_FOUND_ERROR: 404,
     SERVER_ERROR: 500,
+    TOKEN_VALIDITY_PERIOD: "24h",
 
     // Strings
     CONTACTS: "contacts",
@@ -19,6 +20,7 @@ exports.constants = {
     PASSWORD_ERROR: "Please input valid password",
     LOGIN_ERROR: "Email or password invalid",
     EMAIL_EXISTS: "Email exists",
-    CONTACT_NOT_FOUND: "contact not found",
-    ALL_FIELDS_ARE_MANADATORY: "All fields are necessary"
+    CONTACT_NOT_FOUND: "Contact not found",
+    ALL_FIELDS_ARE_MANADATORY: "All fields are necessary",
+    USER_PERMISSION_ERROR: "User don't have permission to update other user contacts"
 };
